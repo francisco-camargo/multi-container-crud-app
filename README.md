@@ -34,18 +34,27 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **3. Configure Docker for MariaDB**
+## **3. Create Initialization Script**
+
+📌 **Milestone:** Create a SQL script to control the order of running other SQL scripts.
+📄 **File:** `init.sql`
+🔹 This file will source `schema.sql` and `seed.sql` in the desired order.
+
+---
+
+## **4. Configure Docker for MariaDB**
 
 📌 **Milestone:** Create a Docker environment to run MariaDB.
 📄 **Files:**
 
 - `Dockerfile` (to define the MariaDB container setup).
 - `docker-compose.yml` (to manage services like MariaDB).
+- `.env` (to store environment variables).
   🔹 This ensures **MariaDB runs in a container** and is easy to start/stop.
 
 ---
 
-## **4. Connect Python to MariaDB**
+## **5. Connect Python to MariaDB**
 
 📌 **Milestone:** Write a Python script to connect to the database, run queries, and retrieve data.
 📄 **File:** `db_connect.py`
@@ -53,18 +62,17 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **5. Run Migrations & Seed Data**
+## **6. Run Migrations & Seed Data**
 
 📌 **Milestone:** Automate database setup with Python.
 📄 **File:** `setup_db.py`
 🔹 This script will:
 ✅ Create the database (if it doesn’t exist).
-✅ Run `schema.sql` to create tables.
-✅ Run `seed.sql` to insert test data.
+✅ Run `init.sql` to create tables and insert test data.
 
 ---
 
-## **6. Test Queries & CRUD Operations**
+## **7. Test Queries & CRUD Operations**
 
 📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
 📄 **Files:**
@@ -74,7 +82,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **7. Containerize the Python App (Optional)**
+## **8. Containerize the Python App (Optional)**
 
 📌 **Milestone:** Run your Python scripts inside a Docker container.
 📄 **File:** `Dockerfile` (for Python container).
