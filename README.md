@@ -62,6 +62,8 @@ Please ensure proper attribution when using or modifying this work.
 
 🔹 **Data persistence** is achieved using a named Docker volume (`mariadb_data_volume`).
 
+See section "How to Instantiate the MariaDB Container" to run the project at this stage.
+
 ---
 
 ## **5. Connect Python to MariaDB**
