@@ -115,7 +115,7 @@ Once these files and milestones are in place, you’ll be able to:
 3. **Build and Start the MariaDB Container**:
    Use Docker Compose to build and start the MariaDB container.
    ```sh
-   docker compose up --build
+   docker compose up --build -d
    ```
 
 4. **Stop the MariaDB Container**:
@@ -130,4 +130,25 @@ Once these files and milestones are in place, you’ll be able to:
    docker exec -it mariadb_container bash
    ```
 
-These steps will help you set up and manage the MariaDB container for your multi-container CRUD application.
+   To enter MariaDB run
+   ```sh
+   mariadb -u user -puserpassword
+   ```
+
+   Or, alternatively, run
+   ```sh
+   docker exec -it mariadb_container mariadb -u user -puserpassword
+   ```
+
+    Either way, once you are in the MariaDB program, you can verify that the database is up by running
+   ```sh
+   SHOW DATABASES;
+
+   >>>
+   +--------------------+
+   | Database           |
+   +--------------------+
+   | crud_db            |
+   | information_schema |
+   +--------------------+
+   ```
