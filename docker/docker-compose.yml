@@ -14,3 +14,4 @@ services:
 
 volumes:
   mariadb_data:
+    name: mariadb_data_volume
