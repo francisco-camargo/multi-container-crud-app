@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mariadb:
+    build: .
+    container_name: mariadb_container
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
