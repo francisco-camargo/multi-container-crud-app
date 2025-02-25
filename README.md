@@ -97,3 +97,37 @@ Once these files and milestones are in place, you’ll be able to:
 ✅ Start and stop your database with **Docker**.
 ✅ Run Python scripts to **insert, update, and query data**.
 ✅ Easily deploy or share your setup.
+
+# How to Instantiate the MariaDB Container
+
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/francisco-camargo/multi-container-crud-app.git
+   cd multi-container-crud-app
+   ```
+
+2. **Create the `.env` File**:
+   Copy the `.env-template` file to `.env` and fill in the required environment variables.
+   ```sh
+   cp docker/.env-template docker/.env
+   ```
+
+3. **Build and Start the MariaDB Container**:
+   Use Docker Compose to build and start the MariaDB container.
+   ```sh
+   docker compose up --build
+   ```
+
+4. **Stop the MariaDB Container**:
+   To stop the MariaDB container, use the following command:
+   ```sh
+   docker compose down
+   ```
+
+5. **Access the MariaDB Container**:
+   To access the MariaDB container, use the following command:
+   ```sh
+   docker exec -it mariadb_container bash
+   ```
+
+These steps will help you set up and manage the MariaDB container for your multi-container CRUD application.
