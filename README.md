@@ -109,7 +109,7 @@ Once these files and milestones are in place, you’ll be able to:
 2. **Create the `.env` File**:
    Copy the `.env-template` file to `.env` and fill in the required environment variables.
    ```sh
-   cp docker/.env-template docker/.env
+   cp .env-template .env
    ```
 
 3. **Build and Start the MariaDB Container**:
