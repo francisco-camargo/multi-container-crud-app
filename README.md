@@ -152,3 +152,6 @@ Once these files and milestones are in place, you’ll be able to:
    | information_schema |
    +--------------------+
    ```
+
+* `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
+* `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
