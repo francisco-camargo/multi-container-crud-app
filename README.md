@@ -51,6 +51,7 @@ Please ensure proper attribution when using or modifying this work.
 - `docker-compose.yml` (to manage services like MariaDB).
 - `.env` (to store environment variables). Use `.env-template` as a reference. Don't use quotes or spaces.
   🔹 This ensures **MariaDB runs in a container** and is easy to start/stop.
+  🔹 **Data persistence** is achieved using a named Docker volume (`mariadb_data_volume`).
 
 ---
 
@@ -96,3 +97,61 @@ Once these files and milestones are in place, you’ll be able to:
 ✅ Start and stop your database with **Docker**.
 ✅ Run Python scripts to **insert, update, and query data**.
 ✅ Easily deploy or share your setup.
+
+# How to Instantiate the MariaDB Container
+
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/francisco-camargo/multi-container-crud-app.git
+   cd multi-container-crud-app
+   ```
+
+2. **Create the `.env` File**:
+   Copy the `.env-template` file to `.env` and fill in the required environment variables.
+   ```sh
+   cp .env-template .env
+   ```
+
+3. **Build and Start the MariaDB Container**:
+   Use Docker Compose to build and start the MariaDB container.
+   ```sh
+   docker compose up --build -d
+   ```
+
+4. **Stop the MariaDB Container**:
+   To stop the MariaDB container, use the following command:
+   ```sh
+   docker compose down
+   ```
+
+5. **Access the MariaDB Container**:
+   To access the MariaDB container, use the following command:
+   ```sh
+   docker exec -it mariadb_container bash
+   ```
+
+   To enter MariaDB run
+   ```sh
+   mariadb -u user -puserpassword
+   ```
+
+   Or, alternatively, run
+   ```sh
+   docker exec -it mariadb_container mariadb -u user -puserpassword
+   ```
+
+    Either way, once you are in the MariaDB program, you can verify that the database is up by running
+   ```sh
+   SHOW DATABASES;
+
+   >>>
+   +--------------------+
+   | Database           |
+   +--------------------+
+   | crud_db            |
+   | information_schema |
+   +--------------------+
+   ```
+
+* `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
+* `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`

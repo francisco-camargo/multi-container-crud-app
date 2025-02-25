@@ -1,0 +1,15 @@
+services:
+  mariadb:
+    build: .
+    container_name: mariadb_container
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+
+volumes:
+  mariadb_data:
+    name: mariadb_data_volume
