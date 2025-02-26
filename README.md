@@ -107,6 +107,17 @@ This will connect to the MariaDB instance running in the Docker container and pr
 
 📌 **Milestone:** Automate database setup with Python.
 
+So far, `docker-compose.yaml` configuration already ensures that `init.sql` runs when the MariaDB container is started. Recall, that this was achieved by mounting the `/sql` directory to `/docker-entrypoint-initdb.d` in the container, which is a special directory that MariaDB uses to initialize the database.
+
+Now we will create a script that does handles the database initialization, `setup_db.py`.
+
+While `docker-compose.yaml` handles the initial setup of the database, there are still some scenarios where having a `setup_db.py` script can be beneficial:
+
+* Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
+* Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
+* Additional Logic: The script can include additional logic, such as conditional checks, logging, or more complex initialization steps that are not easily handled by SQL scripts alone
+* CI/CD Integration: The script can be integrated into CI/CD pipelines to ensure the database is correctly set up before running tests or deploying the application
+
 📄 **File:** `setup_db.py`
 
 🔹 This script will:
