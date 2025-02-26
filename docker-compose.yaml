@@ -1,9 +1,9 @@
 services:
   mariadb:
-    build: .
+    image: mariadb:11.7.2
     container_name: mariadb_container
     ports:
-      - "${MARIADB_PORT}:3306"
+      - "${MARIADB_PORT}:${MARIADB_PORT}"
     env_file:
       - .env
     volumes:
