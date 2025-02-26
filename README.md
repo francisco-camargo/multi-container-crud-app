@@ -108,9 +108,9 @@ This will connect to the MariaDB instance running in the Docker container and pr
 
 So far, `docker-compose.yaml` configuration already ensures that `init.sql` runs when the MariaDB container is started. Recall, that this was achieved by mounting the `/sql` directory to `/docker-entrypoint-initdb.d` in the container, which is a special directory that MariaDB uses to initialize the database.
 
-Now we will create a script that does handles the database initialization, `setup_db.py`.
+Now we will create a script, `setup_db.py`, that handles the database initialization directley.
 
-While `docker-compose.yaml` handles the initial setup of the database, there are still some scenarios where having a `setup_db.py` script can be beneficial:
+While `docker-compose.yaml` handles the initial setup of the database, there are some scenarios where having a `setup_db.py` script can be beneficial:
 
 * Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
 * Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
@@ -161,57 +161,76 @@ Once these files and milestones are in place, you’ll be able to:
 # How to Instantiate the MariaDB Container
 
 1. **Clone the Repository**:
-```sh
-git clone https://github.com/francisco-camargo/multi-container-crud-app.git
-cd multi-container-crud-app
-```
+
+    ```sh
+    git clone https://github.com/francisco-camargo/multi-container-crud-app.git
+    cd multi-container-crud-app
+    ```
 
 2. **Create the `.env` File**:
-Copy the `.env-template` file to `.env` and fill in the required environment variables.
-```sh
-cp .env-template .env
-```
+    Copy the `.env-template` file to `.env` and fill in the required environment variables.
+
+    ```sh
+    cp .env-template .env
+    ```
 
 3. **Build and Start the MariaDB Container**:
-Use Docker Compose to build and start the MariaDB container.
-```sh
-docker compose up --build -d
-```
+    Use Docker Compose to build and start the MariaDB container.
 
-4. **Stop the MariaDB Container**:
-To stop the MariaDB container, use the following command:
-```sh
-docker compose down
-```
+    ```sh
+    docker compose up --build -d
+    ```
 
-5. **Access the MariaDB Container**:
-To access the MariaDB container, use the following command:
-```sh
-docker exec -it mariadb_container bash
-```
+4. **Initialize the Database**:
+    Run the setup script to create and initialize the database:
 
-To enter MariaDB run
-```sh
-mariadb -u user -puserpassword
-```
+    ```sh
+    python src/setup_db.py
+    ```
 
-Or, alternatively, run
-```sh
-docker exec -it mariadb_container mariadb -u user -puserpassword
-```
+5. **Stop the MariaDB Container**:
+    To stop the MariaDB container, use one of the following commands:
 
-Either way, once you are in the MariaDB program, you can verify that the database is up by running
-```sh
-SHOW DATABASES;
+    ```sh
+    # Stop the container but keep the database volume
+    docker compose down
 
->>>
-+--------------------+
-| Database           |
-+--------------------+
-| crud_db            |
-| information_schema |
-+--------------------+
-```
+    # Stop the container and delete the database volume
+    docker compose down -v
+    ```
+
+6. **Access the MariaDB Container**:
+    To access the MariaDB container, use the following command:
+
+    ```sh
+    docker exec -it mariadb_container bash
+    ```
+
+    To enter MariaDB run
+
+    ```sh
+    mariadb -u user -puserpassword
+    ```
+
+    Or, alternatively, run
+
+    ```sh
+    docker exec -it mariadb_container mariadb -u user -puserpassword
+    ```
+
+    Either way, once you are in the MariaDB program, you can verify that the database is up by running
+
+    ```sh
+    SHOW DATABASES;
+
+    >>>
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | crud_db            |
+    | information_schema |
+    +--------------------+
+    ```
 
 * `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
 * `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
