@@ -27,7 +27,7 @@ Please ensure proper attribution when using or modifying this work.
 
 # TODO
 
-* Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists
+* Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
 
 # Roadmap
 
