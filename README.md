@@ -25,6 +25,10 @@ If you use this repository in your work, please cite it as follows:
 
 Please ensure proper attribution when using or modifying this work.
 
+# TODO
+
+* Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists
+
 # Roadmap
 
 ## **1. Define the Database Schema**
@@ -86,19 +90,19 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 1. **Install Dependencies**:
 
-```sh
-pip install -r requirements.txt
-```
+    ```sh
+    pip install -r requirements.txt
+    ```
 
 2. **Run the Script**:
 
-Ensure that the MariaDB container is running before executing the script.
+    Ensure that the MariaDB container is running before executing the script.
 
-```sh
-python src/db_connect.py
-```
+    ```sh
+    python src/db_connect.py
+    ```
 
-This will connect to the MariaDB instance running in the Docker container and print a success message if the connection is established.
+    This will connect to the MariaDB instance running in the Docker container and print a success message if the connection is established.
 
 ---
 
@@ -189,14 +193,17 @@ Once these files and milestones are in place, you’ll be able to:
     ```
 
 5. **Stop the MariaDB Container**:
-    To stop the MariaDB container, use one of the following commands:
+    To stop the MariaDB container and clean up, use one of the following approaches:
 
     ```sh
-    # Stop the container but keep the database volume
+    # Just stop the container but keep the database volume
     docker compose down
 
-    # Stop the container and delete the database volume
+    # Stop the container and remove the declared volume
     docker compose down -v
+
+    # To delete just the database but keep the container running:
+    python src/delete_db.py
     ```
 
 6. **Access the MariaDB Container**:
