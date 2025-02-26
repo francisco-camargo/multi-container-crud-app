@@ -92,6 +92,7 @@ pip install -r requirements.txt
 ```
 
 2. **Run the Script**:
+
 Ensure that the MariaDB container is running before executing the script.
 
 ```sh
