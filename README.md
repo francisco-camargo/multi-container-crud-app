@@ -1,6 +1,15 @@
 Multi-Container CRUD Application
 ================================
 
+# Purpose
+
+This project is designed for educational purposes. It aims to help you learn how to:
+
+- Set up and configure Docker containers.
+- Create and manage a MariaDB database.
+- Connect a Python application to a MariaDB database.
+- Perform CRUD (Create, Read, Update, Delete) operations using SQL and Python.
+
 # Citation Instructions
 
 If you use this repository in your work, please cite it as follows:
