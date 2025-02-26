@@ -77,11 +77,28 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ## **5. Connect Python to MariaDB**
 
-📌 **Milestone:** Write a Python script to connect to the database, run queries, and retrieve data.
+📌 **Milestone:** Write a Python script to run on the host machine to connect to the database, run queries, and retrieve data.
 
-📄 **File:** `db_connect.py`
+📄 **File:** `src/db_connect.py`
 
-🔹 This script will use a MariaDB library (`mysql-connector-python` or `SQLAlchemy`) to interact with the database.
+🔹 This script will use a MariaDB library (`mariadb`) to interact with the database. I chose `mariadb` over `sqlalchemy` because I will use SQL scripts instead of using ORM functionality so `mariadb` will suffice.
+
+🔹 **Running the Script:**
+
+1. **Install Dependencies**:
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+   **Run the Script**:
+   Ensure that the MariaDB container is running before executing the script.
+
+   ```sh
+   python src/db_connect.py
+   ```
+
+This will connect to the MariaDB instance running in the Docker container and print a success message if the connection is established.
 
 ---
 
