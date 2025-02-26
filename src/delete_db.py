@@ -18,8 +18,8 @@ def delete_database():
         'password': os.getenv('MARIADB_ROOT_PASSWORD')
     }
 
-    max_retries = 5
-    retry_delay = 2  # seconds
+    max_retries = 10
+    retry_delay = 3  # seconds
 
     for attempt in range(max_retries):
         try:
