@@ -55,7 +55,7 @@ Please ensure proper attribution when using or modifying this work.
 📄 **Files:**
 
 - `Dockerfile` (to define the MariaDB container setup).
-- `docker-compose.yml` (to manage services like MariaDB).
+- `docker-compose.yaml` (to manage services like MariaDB).
 - `.env` (to store environment variables). Use `.env-template` as a reference. Don't use quotes or spaces.
 
 🔹 This ensures **MariaDB runs in a container** and is easy to start/stop.
