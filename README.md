@@ -1,7 +1,6 @@
-Multi-Container CRUD Application
-================================
+# Multi-Container CRUD Application
 
-# Purpose
+## Purpose
 
 This project is designed for educational purposes. It aims to help you learn how to:
 
@@ -10,7 +9,7 @@ This project is designed for educational purposes. It aims to help you learn how
 - Connect a Python application to a MariaDB database.
 - Perform CRUD (Create, Read, Update, Delete) operations using SQL and Python.
 
-# Citation Instructions
+## Citation Instructions
 
 If you use this repository in your work, please cite it as follows:
 
@@ -25,13 +24,13 @@ If you use this repository in your work, please cite it as follows:
 
 Please ensure proper attribution when using or modifying this work.
 
-# TODO
+## Known Issues
 
 - Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
 
-# Roadmap
+## Project Roadmap
 
-## **1. Define the Database Schema**
+### 1. Define the Database Schema
 
 📌 **Milestone:** Create a SQL script to define the database structure (tables, relationships, constraints).
 
@@ -41,7 +40,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **2. Set Up Sample Data**
+### 2. Set Up Sample Data
 
 📌 **Milestone:** Create a SQL script to insert test data into the tables.
 
@@ -51,7 +50,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **3. Create Initialization Script**
+### 3. Create Initialization Script
 
 📌 **Milestone:** Create a SQL script to control the order of running other SQL scripts.
 
@@ -61,7 +60,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **4. Configure Docker for MariaDB**
+### 4. Configure Docker for MariaDB
 
 📌 **Milestone:** Create a Docker environment to run MariaDB.
 
@@ -78,7 +77,7 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-## **5. Connect Python to MariaDB**
+### 5. Connect Python to MariaDB
 
 📌 **Milestone:** Write a Python script to run on the host machine to connect to the database, run queries, and retrieve data.
 
@@ -106,7 +105,7 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-## **6. Run Migrations & Seed Data**
+### 6. Run Migrations & Seed Data
 
 📌 **Milestone:** Automate database setup with Python.
 
@@ -131,7 +130,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **7. Test Queries & CRUD Operations**
+### 7. Test Queries & CRUD Operations
 
 📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
 
@@ -142,7 +141,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **8. Containerize the Python App (Optional)**
+### 8. Containerize the Python App (Optional)
 
 📌 **Milestone:** Run your Python scripts inside a Docker container.
 
@@ -152,7 +151,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **Next Steps**
+## Next Steps
 
 Once these files and milestones are in place, you’ll be able to:
 
@@ -162,7 +161,7 @@ Once these files and milestones are in place, you’ll be able to:
 
 ✅ Easily deploy or share your setup.
 
-# How to Instantiate the MariaDB Container
+## How to Instantiate the MariaDB Container
 
 1. **Clone the Repository**:
 
