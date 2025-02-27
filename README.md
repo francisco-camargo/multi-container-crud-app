@@ -18,16 +18,16 @@ If you use this repository in your work, please cite it as follows:
 
 **Suggested Citation**:
 
-* Author: Francisco Camargo
-* Title: Multi-Container CRUD Application
-* Source: https://github.com/francisco-camargo/multi-container-crud-app
-* Date Accessed:
+- Author: Francisco Camargo
+- Title: Multi-Container CRUD Application
+- Source: <https://github.com/francisco-camargo/multi-container-crud-app>
+- Date Accessed:
 
 Please ensure proper attribution when using or modifying this work.
 
 # TODO
 
-* Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
+- Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
 
 # Roadmap
 
@@ -112,14 +112,14 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 So far, `docker-compose.yaml` configuration already ensures that `init.sql` runs when the MariaDB container is started. Recall, that this was achieved by mounting the `/sql` directory to `/docker-entrypoint-initdb.d` in the container, which is a special directory that MariaDB uses to initialize the database.
 
-Now we will create a script, `setup_db.py`, that handles the database initialization directley.
+Now we will create a script, `setup_db.py`, that handles the database initialization directly.
 
 While `docker-compose.yaml` handles the initial setup of the database, there are some scenarios where having a `setup_db.py` script can be beneficial:
 
-* Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
-* Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
-* Additional Logic: The script can include additional logic, such as conditional checks, logging, or more complex initialization steps that are not easily handled by SQL scripts alone
-* CI/CD Integration: The script can be integrated into CI/CD pipelines to ensure the database is correctly set up before running tests or deploying the application
+- Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
+- Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
+- Additional Logic: The script can include additional logic, such as conditional checks, logging, or more complex initialization steps that are not easily handled by SQL scripts alone
+- CI/CD Integration: The script can be integrated into CI/CD pipelines to ensure the database is correctly set up before running tests or deploying the application
 
 📄 **File:** `setup_db.py`
 
@@ -239,5 +239,5 @@ Once these files and milestones are in place, you’ll be able to:
     +--------------------+
     ```
 
-* `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
-* `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
+- `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
+- `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
