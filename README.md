@@ -1,7 +1,6 @@
-Multi-Container CRUD Application
-================================
+# Multi-Container CRUD Application
 
-# Purpose
+## Purpose
 
 This project is designed for educational purposes. It aims to help you learn how to:
 
@@ -10,7 +9,7 @@ This project is designed for educational purposes. It aims to help you learn how
 - Connect a Python application to a MariaDB database.
 - Perform CRUD (Create, Read, Update, Delete) operations using SQL and Python.
 
-# Citation Instructions
+## Citation Instructions
 
 If you use this repository in your work, please cite it as follows:
 
@@ -18,20 +17,16 @@ If you use this repository in your work, please cite it as follows:
 
 **Suggested Citation**:
 
-* Author: Francisco Camargo
-* Title: Multi-Container CRUD Application
-* Source: https://github.com/francisco-camargo/multi-container-crud-app
-* Date Accessed:
+- Author: Francisco Camargo
+- Title: Multi-Container CRUD Application
+- Source: <https://github.com/francisco-camargo/multi-container-crud-app>
+- Date Accessed:
 
 Please ensure proper attribution when using or modifying this work.
 
-# TODO
+## Project Roadmap
 
-* Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
-
-# Roadmap
-
-## **1. Define the Database Schema**
+### 1. Define the Database Schema
 
 📌 **Milestone:** Create a SQL script to define the database structure (tables, relationships, constraints).
 
@@ -41,7 +36,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **2. Set Up Sample Data**
+### 2. Set Up Sample Data
 
 📌 **Milestone:** Create a SQL script to insert test data into the tables.
 
@@ -51,17 +46,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-## **3. Create Initialization Script**
-
-📌 **Milestone:** Create a SQL script to control the order of running other SQL scripts.
-
-📄 **File:** `init.sql`
-
-🔹 This file will source `schema.sql` and `seed.sql` in the desired order.
-
----
-
-## **4. Configure Docker for MariaDB**
+### 3. Configure Docker for MariaDB
 
 📌 **Milestone:** Create a Docker environment to run MariaDB.
 
@@ -78,7 +63,7 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-## **5. Connect Python to MariaDB**
+### 4. Connect Python to MariaDB
 
 📌 **Milestone:** Write a Python script to run on the host machine to connect to the database, run queries, and retrieve data.
 
@@ -106,20 +91,20 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-## **6. Run Migrations & Seed Data**
+### 5. Run Migrations & Seed Data
 
 📌 **Milestone:** Automate database setup with Python.
 
 So far, `docker-compose.yaml` configuration already ensures that `init.sql` runs when the MariaDB container is started. Recall, that this was achieved by mounting the `/sql` directory to `/docker-entrypoint-initdb.d` in the container, which is a special directory that MariaDB uses to initialize the database.
 
-Now we will create a script, `setup_db.py`, that handles the database initialization directley.
+Now we will create a script, `setup_db.py`, that handles the database initialization directly.
 
 While `docker-compose.yaml` handles the initial setup of the database, there are some scenarios where having a `setup_db.py` script can be beneficial:
 
-* Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
-* Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
-* Additional Logic: The script can include additional logic, such as conditional checks, logging, or more complex initialization steps that are not easily handled by SQL scripts alone
-* CI/CD Integration: The script can be integrated into CI/CD pipelines to ensure the database is correctly set up before running tests or deploying the application
+- Reinitialization: If you need to reinitialize the database without restarting the container, a Python script can be run independently to reset the database state
+- Environment Flexibility: The script can be used in environments where Docker is not available or not preferred, such as local development without containers
+- Additional Logic: The script can include additional logic, such as conditional checks, logging, or more complex initialization steps that are not easily handled by SQL scripts alone
+- CI/CD Integration: The script can be integrated into CI/CD pipelines to ensure the database is correctly set up before running tests or deploying the application
 
 📄 **File:** `setup_db.py`
 
@@ -127,11 +112,31 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ✅ Create the database (if it doesn’t exist).
 
-✅ Run `init.sql` to create tables and insert test data.
+---
+
+## **6. Initialize Database Schema and Data**
+
+📌 **Milestone:** Create tables and populate with initial data.
+
+📄 **File:** `initialize_db.py`
+
+🔹 This script will:
+
+✅ Connect to the database created by `setup_db.py`
+
+✅ Execute `schema.sql` to create the tables
+
+✅ Execute `seed.sql` to populate tables with test data
+
+🔹 **Running the Script:**
+
+```sh
+python src/initialize_db.py
+```
 
 ---
 
-## **7. Test Queries & CRUD Operations**
+### 7. Test Queries & CRUD Operations
 
 📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
 
@@ -142,7 +147,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **8. Containerize the Python App (Optional)**
+### 8. Containerize the Python App (Optional)
 
 📌 **Milestone:** Run your Python scripts inside a Docker container.
 
@@ -152,7 +157,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **Next Steps**
+## Next Steps
 
 Once these files and milestones are in place, you’ll be able to:
 
@@ -162,7 +167,7 @@ Once these files and milestones are in place, you’ll be able to:
 
 ✅ Easily deploy or share your setup.
 
-# How to Instantiate the MariaDB Container
+## How to Instantiate the MariaDB Container
 
 1. **Clone the Repository**:
 
@@ -239,5 +244,5 @@ Once these files and milestones are in place, you’ll be able to:
     +--------------------+
     ```
 
-* `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
-* `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
+- `information_schema`: A system database that contains metadata about the database server and its objects. It is automatically created and managed by MariaDB.
+- `crud_db`: A user-defined database created for your application to store your application's data. The name is defined in `.env`
