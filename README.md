@@ -24,10 +24,6 @@ If you use this repository in your work, please cite it as follows:
 
 Please ensure proper attribution when using or modifying this work.
 
-## Known Issues
-
-- Even if I don't run `setup_db.py`, somehow `crud_db.py` seems to be instantiated. I say this because if I delete everything, then run `docker compose up --build -d` and then run `delete_db.py`, this python script says that `crud_db.py` exists. It has to do with the fact that I have `MARIADB_DATABASE=crud_db` within `.env`. If I remove this from `.env` and start fresh, then `delete_db.py` does not find a database to delete. Even though the database exists, it has no tables. This was confirmed by running `show_data.py`.
-
 ## Project Roadmap
 
 ### 1. Define the Database Schema
@@ -50,17 +46,7 @@ Please ensure proper attribution when using or modifying this work.
 
 ---
 
-### 3. Create Initialization Script
-
-📌 **Milestone:** Create a SQL script to control the order of running other SQL scripts.
-
-📄 **File:** `init.sql`
-
-🔹 This file will source `schema.sql` and `seed.sql` in the desired order.
-
----
-
-### 4. Configure Docker for MariaDB
+### 3. Configure Docker for MariaDB
 
 📌 **Milestone:** Create a Docker environment to run MariaDB.
 
@@ -77,7 +63,7 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-### 5. Connect Python to MariaDB
+### 4. Connect Python to MariaDB
 
 📌 **Milestone:** Write a Python script to run on the host machine to connect to the database, run queries, and retrieve data.
 
@@ -105,7 +91,7 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-### 6. Run Migrations & Seed Data
+### 5. Run Migrations & Seed Data
 
 📌 **Milestone:** Automate database setup with Python.
 
@@ -126,7 +112,27 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ✅ Create the database (if it doesn’t exist).
 
-✅ Run `init.sql` to create tables and insert test data.
+---
+
+## **6. Initialize Database Schema and Data**
+
+📌 **Milestone:** Create tables and populate with initial data.
+
+📄 **File:** `initialize_db.py`
+
+🔹 This script will:
+
+✅ Connect to the database created by `setup_db.py`
+
+✅ Execute `schema.sql` to create the tables
+
+✅ Execute `seed.sql` to populate tables with test data
+
+🔹 **Running the Script:**
+
+```sh
+python src/initialize_db.py
+```
 
 ---
 
