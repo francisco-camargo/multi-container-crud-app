@@ -114,7 +114,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ---
 
-## **6. Initialize Database Schema and Data**
+### **6. Initialize Database Schema and Data**
 
 📌 **Milestone:** Create tables and populate with initial data.
 
