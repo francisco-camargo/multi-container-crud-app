@@ -19,7 +19,7 @@ If you use this repository in your work, please cite it as follows:
 
 - Author: Francisco Camargo
 - Title: Multi-Container CRUD Application
-- Source: <https://github.com/francisco-camargo/multi-container-crud-app>
+- Source: [https://github.com/francisco-camargo/multi-container-crud-app](https://github.com/francisco-camargo/multi-container-crud-app)
 - Date Accessed:
 
 Please ensure proper attribution when using or modifying this work.
@@ -91,13 +91,13 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
 ---
 
-### 5. Run Migrations & Seed Data
+### 5. Explicit Database Creation (Optional)
 
 📌 **Milestone:** Automate database setup with Python.
 
 So far, `docker-compose.yaml` configuration already ensures that `init.sql` runs when the MariaDB container is started. Recall, that this was achieved by mounting the `/sql` directory to `/docker-entrypoint-initdb.d` in the container, which is a special directory that MariaDB uses to initialize the database.
 
-Now we will create a script, `setup_db.py`, that handles the database initialization directly.
+Now we will create a script, `setup_db.py`, that handles the database creation directly.
 
 While `docker-compose.yaml` handles the initial setup of the database, there are some scenarios where having a `setup_db.py` script can be beneficial:
 
