@@ -34,8 +34,6 @@ Please ensure proper attribution when using or modifying this work.
 
 🔹 This file will contain `CREATE TABLE` statements for your **three tables**.
 
----
-
 ### 2. Set Up Sample Data
 
 📌 **Milestone:** Create a SQL script to insert test data into the tables.
@@ -43,8 +41,6 @@ Please ensure proper attribution when using or modifying this work.
 📄 **File:** `seed.sql`
 
 🔹 This file will contain `INSERT INTO` statements with **dummy data** to test queries.
-
----
 
 ### 3. Configure Docker for MariaDB
 
@@ -60,8 +56,6 @@ Please ensure proper attribution when using or modifying this work.
 🔹 **Data persistence** is achieved using a named Docker volume (`mariadb_data_volume`).
 
 See section "How to Instantiate the MariaDB Container" to run the project at this stage.
-
----
 
 ### 4. Connect Python to MariaDB
 
@@ -89,8 +83,6 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
     This will connect to the MariaDB instance running in the Docker container and print a success message if the connection is established.
 
----
-
 ### 5. Explicit Database Creation (Optional)
 
 📌 **Milestone:** Automate database setup with Python.
@@ -112,8 +104,6 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ✅ Create the database (if it doesn’t exist).
 
----
-
 ### **6. Initialize Database Schema and Data**
 
 📌 **Milestone:** Create tables and populate with initial data.
@@ -134,8 +124,6 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 python src/initialize_db.py
 ```
 
----
-
 ### 7. Test Queries & CRUD Operations
 
 📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
@@ -145,8 +133,6 @@ python src/initialize_db.py
 - `query_tests.py` (test queries).
 - `crud_operations.py` (Python functions for Create, Read, Update, Delete).
 
----
-
 ### 8. Containerize the Python App (Optional)
 
 📌 **Milestone:** Run your Python scripts inside a Docker container.
@@ -154,8 +140,6 @@ python src/initialize_db.py
 📄 **File:** `Dockerfile` (for Python container).
 
 🔹 This allows your **Python app** to run in a container alongside MariaDB.
-
----
 
 ## Next Steps
 
