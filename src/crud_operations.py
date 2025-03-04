@@ -24,11 +24,11 @@ class DatabaseCRUD:
 
     def create_record(self, table: str, data: Dict[str, Any]) -> int:
         """
-        Insert a new record into the specified table.
+        Insert a new record into the specified table using SQL.
 
         Args:
-            table: Name of the table
-            data: Dictionary of column names and values
+            table: Name of the table (e.g., 'users')
+            data: Dictionary of column names and values (e.g., {"name": "Alice", "email": "alice@example.com"})
 
         Returns:
             ID of the inserted record
@@ -36,19 +36,16 @@ class DatabaseCRUD:
         try:
             connection, cursor = self._get_connection()
 
-            # Join column names with commas: "name, email, age"
-            columns = ', '.join(data.keys())
+            # Build SQL INSERT statement
+            sql = f"""
+                INSERT INTO {table}
+                    ({', '.join(data.keys())})
+                VALUES
+                    ({', '.join(['%s' for _ in data])})
+            """
 
-            # Create placeholders for safe value insertion: "?, ?, ?"
-            # One '?' for each item in data dictionary
-            placeholders = ', '.join(['?' for _ in data])
-
-            # Build final query like: "INSERT INTO users (name, email, age) VALUES (?, ?, ?)"
-            # Values will be safely inserted when query is executed
-            query = f"INSERT INTO {table} ({columns}) VALUES ({placeholders})"
-
-            # Execute query with actual values from data dictionary
-            cursor.execute(query, list(data.values()))
+            # Execute the SQL with values
+            cursor.execute(sql, list(data.values()))
             connection.commit()
             return cursor.lastrowid
 
