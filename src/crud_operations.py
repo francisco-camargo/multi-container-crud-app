@@ -24,7 +24,7 @@ class DatabaseCRUD:
 
     def create_record(self, table: str, data: Dict[str, Any]) -> int:
         """
-        Insert a new record into the specified table using SQL.
+        Insert a new record into the specified table using SQL template file.
 
         Args:
             table: Name of the table (e.g., 'users')
@@ -36,13 +36,19 @@ class DatabaseCRUD:
         try:
             connection, cursor = self._get_connection()
 
-            # Build SQL INSERT statement
-            sql = f"""
-                INSERT INTO {table}
-                    ({', '.join(data.keys())})
-                VALUES
-                    ({', '.join(['%s' for _ in data])})
-            """
+            # Read SQL template using the correct path
+            sql_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'sql', 'insert_record.sql')
+            with open(sql_path, 'r') as f:
+                sql_template = f.read()
+
+            # Format the SQL template
+            columns = ', '.join(data.keys())
+            values_placeholders = ', '.join(['%s' for _ in data])
+            sql = sql_template.format(
+                table=table,
+                columns=columns,
+                values=values_placeholders,
+            )
 
             # Execute the SQL with values
             cursor.execute(sql, list(data.values()))
