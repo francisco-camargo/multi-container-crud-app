@@ -31,6 +31,10 @@ def initialize_database():
             connection = mariadb.connect(**config)
             cursor = connection.cursor()
 
+            # Explicitly select database
+            database = config['database']
+            cursor.execute(f"USE {database}")
+
             sql_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'sql')
 
             # Execute schema

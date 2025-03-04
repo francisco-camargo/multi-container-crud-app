@@ -34,8 +34,6 @@ Please ensure proper attribution when using or modifying this work.
 
 🔹 This file will contain `CREATE TABLE` statements for your **three tables**.
 
----
-
 ### 2. Set Up Sample Data
 
 📌 **Milestone:** Create a SQL script to insert test data into the tables.
@@ -43,8 +41,6 @@ Please ensure proper attribution when using or modifying this work.
 📄 **File:** `seed.sql`
 
 🔹 This file will contain `INSERT INTO` statements with **dummy data** to test queries.
-
----
 
 ### 3. Configure Docker for MariaDB
 
@@ -61,7 +57,10 @@ Please ensure proper attribution when using or modifying this work.
 
 See section "How to Instantiate the MariaDB Container" to run the project at this stage.
 
----
+Note, when running `docker compose up`:
+
+- If you get a `unable to get image` error, it may be that docker engine is not running
+- If port 3306 is unexpectedly already in use, it may be mysql. If so kill the process in task manager.
 
 ### 4. Connect Python to MariaDB
 
@@ -89,8 +88,6 @@ See section "How to Instantiate the MariaDB Container" to run the project at thi
 
     This will connect to the MariaDB instance running in the Docker container and print a success message if the connection is established.
 
----
-
 ### 5. Explicit Database Creation (Optional)
 
 📌 **Milestone:** Automate database setup with Python.
@@ -112,9 +109,7 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 
 ✅ Create the database (if it doesn’t exist).
 
----
-
-## **6. Initialize Database Schema and Data**
+### **6. Initialize Database Schema and Data**
 
 📌 **Milestone:** Create tables and populate with initial data.
 
@@ -134,18 +129,18 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 python src/initialize_db.py
 ```
 
----
+### 7. Implement CRUD Operations
 
-### 7. Test Queries & CRUD Operations
+📌 **Milestone:** Create a comprehensive CRUD interface.
 
-📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
+📄 **File:** `crud_operations.py`
 
-📄 **Files:**
+🔹 This script will implement:
 
-- `query_tests.py` (test queries).
-- `crud_operations.py` (Python functions for Create, Read, Update, Delete).
-
----
+- Create: Insert new records
+- Read: Retrieve existing records
+- Update: Modify existing records
+- Delete: Remove records
 
 ### 8. Containerize the Python App (Optional)
 
@@ -154,8 +149,6 @@ python src/initialize_db.py
 📄 **File:** `Dockerfile` (for Python container).
 
 🔹 This allows your **Python app** to run in a container alongside MariaDB.
-
----
 
 ## Next Steps
 

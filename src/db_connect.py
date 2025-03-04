@@ -7,14 +7,15 @@ load_dotenv()
 
 def connect_to_db():
     try:
+        database = os.getenv("MARIADB_DATABASE")
         conn = mariadb.connect(
             user=os.getenv("MARIADB_USER"),
             password=os.getenv("MARIADB_PASSWORD"),
             host=os.getenv("MARIADB_HOST"),
             port=int(os.getenv("MARIADB_PORT")),
-            database=os.getenv("MARIADB_DATABASE")
+            database=database
         )
-        print("Successfully connected to the database")
+        print(f"Successfully connected to database: {database}")
         return conn
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
