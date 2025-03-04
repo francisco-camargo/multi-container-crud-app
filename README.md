@@ -124,14 +124,18 @@ While `docker-compose.yaml` handles the initial setup of the database, there are
 python src/initialize_db.py
 ```
 
-### 7. Test Queries & CRUD Operations
+### 7. Implement CRUD Operations
 
-📌 **Milestone:** Write Python scripts to test `SELECT`, `INSERT`, `UPDATE`, and `DELETE` queries.
+📌 **Milestone:** Create a comprehensive CRUD interface.
 
-📄 **Files:**
+📄 **File:** `crud_operations.py`
 
-- `query_tests.py` (test queries).
-- `crud_operations.py` (Python functions for Create, Read, Update, Delete).
+🔹 This script will implement:
+
+- Create: Insert new records
+- Read: Retrieve existing records
+- Update: Modify existing records
+- Delete: Remove records
 
 ### 8. Containerize the Python App (Optional)
 
