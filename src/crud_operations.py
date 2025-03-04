@@ -115,11 +115,22 @@ class DatabaseCRUD:
         """
         try:
             connection, cursor = self._get_connection()
-            set_clause = ', '.join([f"{k} = ?" for k in data.keys()])
-            query = f"UPDATE {table} SET {set_clause} WHERE id = ?"
 
+            # Read SQL template
+            sql_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'sql', 'update_record.sql')
+            with open(sql_path, 'r') as f:
+                sql_template = f.read()
+
+            # Format the SQL template
+            set_clause = ', '.join([f"{k} = ?" for k in data.keys()])
+            sql = sql_template.format(
+                table=table,
+                set_clause=set_clause
+            )
+
+            # Execute with values including the condition_id
             values = list(data.values()) + [condition_id]
-            cursor.execute(query, values)
+            cursor.execute(sql, values)
             connection.commit()
             return cursor.rowcount > 0
 
