@@ -72,14 +72,28 @@ class DatabaseCRUD:
         """
         try:
             connection, cursor = self._get_connection()
-            query = f"SELECT * FROM {table}"
 
+            # Read SQL template
+            sql_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'sql', 'select_records.sql')
+            with open(sql_path, 'r') as f:
+                sql_template = f.read()
+
+            # Build where clause if conditions exist
+            where_clause = ""
             if conditions:
-                where_clause = ' AND '.join([f"{k} = ?" for k in conditions.keys()])
-                query += f" WHERE {where_clause}"
-                cursor.execute(query, list(conditions.values()))
+                where_clause = "WHERE " + ' AND '.join([f"{k} = ?" for k in conditions.keys()])
+
+            # Format the SQL template
+            sql = sql_template.format(
+                table=table,
+                where_clause=where_clause
+            )
+
+            # Execute query with or without conditions
+            if conditions:
+                cursor.execute(sql, list(conditions.values()))
             else:
-                cursor.execute(query)
+                cursor.execute(sql)
 
             return cursor.fetchall()
 
