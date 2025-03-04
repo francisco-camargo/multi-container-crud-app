@@ -57,6 +57,11 @@ Please ensure proper attribution when using or modifying this work.
 
 See section "How to Instantiate the MariaDB Container" to run the project at this stage.
 
+Note, when running `docker compose up`:
+
+- If you get a `unable to get image` error, it may be that docker engine is not running
+- If port 3306 is unexpectedly already in use, it may be mysql. If so kill the process in task manager.
+
 ### 4. Connect Python to MariaDB
 
 📌 **Milestone:** Write a Python script to run on the host machine to connect to the database, run queries, and retrieve data.
