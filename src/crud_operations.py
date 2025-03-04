@@ -151,9 +151,15 @@ class DatabaseCRUD:
         """
         try:
             connection, cursor = self._get_connection()
-            query = f"DELETE FROM {table} WHERE id = ?"
 
-            cursor.execute(query, (record_id,))
+            # Read SQL template
+            sql_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'sql', 'delete_record.sql')
+            with open(sql_path, 'r') as f:
+                sql_template = f.read()
+
+            # Format and execute the SQL
+            sql = sql_template.format(table=table)
+            cursor.execute(sql, (record_id,))
             connection.commit()
             return cursor.rowcount > 0
 
