@@ -22,7 +22,7 @@ def initialize_database():
 
     # Regular user connection parameters
     config = {
-        'host': 'mariadb',  # Use the service name from docker-compose
+        'host': os.getenv('MARIADB_HOST'),
         'port': int(os.getenv('MARIADB_PORT')),
         'user': os.getenv('MARIADB_USER'),
         'password': os.getenv('MARIADB_PASSWORD'),

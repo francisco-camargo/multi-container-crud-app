@@ -4,9 +4,11 @@ import mariadb
 from dotenv import load_dotenv
 from tabulate import tabulate
 
+host = os.getenv('MARIADB_HOST')
+
 def show_table_data(
     table_name,
-    host='mariadb',
+    host=host,
     ):
     print('Running show_data.py')
     load_dotenv()
