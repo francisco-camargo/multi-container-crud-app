@@ -16,6 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # TODO: be most specific here
 COPY . .
 
-EXPOSE ${FLASK_PORT}
+EXPOSE ${BACKEND_PORT}
 
 CMD ["./run.sh"]

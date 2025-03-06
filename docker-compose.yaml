@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: python_app_container
     ports:
-      - "${FLASK_PORT}:${FLASK_PORT}"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     env_file:
       - .env
     networks:
