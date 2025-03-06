@@ -18,4 +18,4 @@ COPY . .
 
 EXPOSE ${BACKEND_PORT}
 
-CMD ["./src/run.sh"]
+CMD ["python", "main.py"]
