@@ -4,12 +4,15 @@ import mariadb
 from dotenv import load_dotenv
 from tabulate import tabulate
 
-def show_table_data(table_name):
+def show_table_data(
+    table_name,
+    host='mariadb',
+    ):
     print('Running show_data.py')
     load_dotenv()
 
     config = {
-        'host': 'mariadb',  # Use container service name
+        'host': host,  # Use container service name
         'port': int(os.getenv('MARIADB_PORT')),
         'user': os.getenv('MARIADB_USER'),
         'password': os.getenv('MARIADB_PASSWORD'),
@@ -59,4 +62,4 @@ def show_table_data(table_name):
 if __name__ == "__main__":
     tables = ['users', 'posts', 'comments']
     for table in tables:
-        show_table_data(table)
+        show_table_data(table, host='localhost')
