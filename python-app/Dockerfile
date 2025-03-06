@@ -18,4 +18,4 @@ COPY . .
 
 EXPOSE ${BACKEND_PORT}
 
-CMD ["./run.sh"]
+CMD ["./src/run.sh"]
