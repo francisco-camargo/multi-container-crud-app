@@ -12,6 +12,7 @@ services:
       - app-network
 
   python-app:
+    image: crud-python-app:latest # name the image
     build:
       # Directory containing build context (Dockerfile and source files)
       context: ./python-app

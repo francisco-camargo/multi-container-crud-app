@@ -159,6 +159,22 @@ python src/initialize_db.py
 
 ### 9. Return logging back to the host machine
 
+Let's have logging that saves to a file and then have a Docker volume that makes that file visible from the localhost.
+
+The logs will show:
+
+- Timestamp for each log entry
+- Log level (DEBUG, INFO, ERROR, etc.)
+- Component name
+- Detailed message
+
+This setup will help you:
+
+- Debug database connection issues
+- Track SQL query execution
+- Monitor application state
+- Troubleshoot errors in real-time
+
 ## Next Steps
 
 Once these files and milestones are in place, you’ll be able to:
