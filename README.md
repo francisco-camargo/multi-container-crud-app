@@ -175,16 +175,6 @@ This setup will help you:
 - Monitor application state
 - Troubleshoot errors in real-time
 
-## Next Steps
-
-Once these files and milestones are in place, you’ll be able to:
-
-✅ Start and stop your database with **Docker**.
-
-✅ Run Python scripts to **insert, update, and query data**.
-
-✅ Easily deploy or share your setup.
-
 ## How to Instantiate the MariaDB Container
 
 1. **Clone the Repository**:
