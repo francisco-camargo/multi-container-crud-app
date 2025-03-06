@@ -43,13 +43,8 @@ def initialize_database():
             database = config['database']
             cursor.execute(f"USE {database}")
 
-            # Update SQL directory path to be relative to the current file
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            sql_directory = os.path.join(current_dir, 'sql')
+            sql_directory = 'sql'
             print(f"Looking for SQL files in: {sql_directory}")
-
-            # Create sql directory if it doesn't exist
-            os.makedirs(sql_directory, exist_ok=True)
 
             # Execute schema
             schema_path = os.path.join(sql_directory, 'schema.sql')
