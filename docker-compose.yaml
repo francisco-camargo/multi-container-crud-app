@@ -8,6 +8,26 @@ services:
       - .env
     volumes:
       - mariadb_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  python-app:
+    build:
+      # Directory containing build context (Dockerfile and source files)
+      context: ./python-app
+      # Name of the Dockerfile to use (could be omitted if named "Dockerfile")
+      dockerfile: Dockerfile
+    container_name: python_app_container
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   mariadb_data:

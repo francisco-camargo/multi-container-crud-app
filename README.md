@@ -142,13 +142,22 @@ python src/initialize_db.py
 - Update: Modify existing records
 - Delete: Remove records
 
-### 8. Containerize the Python App (Optional)
+### 8. Containerize the Python App
 
 📌 **Milestone:** Run your Python scripts inside a Docker container.
 
 📄 **File:** `Dockerfile` (for Python container).
 
 🔹 This allows your **Python app** to run in a container alongside MariaDB.
+
+- Added `python-app` service to `docker-compose.yaml`
+- Created dedicated `python-app` directory for application files
+  - `Dockerfile` - Container configuration for Python app
+  - `requirements.txt` - Python dependencies
+  - `run.sh` - Application startup script
+  - Python source files (*.py)
+
+### 9. Return logging back to the host machine
 
 ## Next Steps
 
