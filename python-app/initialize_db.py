@@ -4,6 +4,7 @@ import mariadb
 from dotenv import load_dotenv
 
 def execute_sql_file(cursor, filepath):
+    print('Running initialize_db.py')
     print(f"Attempting to execute SQL file: {filepath}")
     try:
         with open(filepath, 'r') as file:

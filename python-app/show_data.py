@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from tabulate import tabulate
 
 def show_table_data(table_name):
+    print('Running show_data.py')
     load_dotenv()
 
     config = {
