@@ -159,7 +159,7 @@ python src/initialize_db.py
 
 ### 9. Return logging back to the host machine
 
-📌 **Milestone:** Add logging that saves logs to a file. A Docker volume will persist the logs into the localhost.
+📌 **Milestone:** Add logging to the `python-app` that saves logs to a file. A Docker volume will persist the logs into the localhost.
 
 The logs will show:
 
