@@ -44,7 +44,7 @@ def initialize_database():
             cursor.execute(f"USE {database}")
 
             # Update SQL directory path to be relative to the current file
-            sql_directory = '/app/sql'
+            sql_directory = 'sql'
             print(f"Looking for SQL files in: {sql_directory}")
 
             # Create sql directory if it doesn't exist
