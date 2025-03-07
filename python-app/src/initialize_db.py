@@ -2,19 +2,22 @@ import os
 import time
 import mariadb
 from dotenv import load_dotenv
+from src.logging_config import setup_logging
+
+# Set up logger
+logger = setup_logging()
 
 def execute_sql_file(cursor, filepath):
-    print('Running initialize_db.py')
-    print(f"Attempting to execute SQL file: {filepath}")
+    logger.info(f"Attempting to execute SQL file: {filepath}")
     try:
         with open(filepath, 'r') as file:
             sql_commands = file.read().split(';')
             for command in sql_commands:
                 if command.strip():
-                    print(f"Executing command: {command.strip()}")
+                    logger.debug(f"Executing SQL command: {command}")
                     cursor.execute(command)
     except FileNotFoundError:
-        print(f"ERROR: SQL file not found at {filepath}")
+        logger.error(f"ERROR: SQL file not found at {filepath}")
         raise
 
 def initialize_database():
@@ -22,7 +25,7 @@ def initialize_database():
 
     # Regular user connection parameters
     config = {
-        'host': 'mariadb',  # Use the service name from docker-compose
+        'host': os.getenv('MARIADB_HOST'),
         'port': int(os.getenv('MARIADB_PORT')),
         'user': os.getenv('MARIADB_USER'),
         'password': os.getenv('MARIADB_PASSWORD'),
@@ -35,7 +38,7 @@ def initialize_database():
 
     for attempt in range(max_retries):
         try:
-            print(f"Attempting to connect as user (attempt {attempt + 1}/{max_retries})...")
+            logger.info(f"Attempting to connect as user (attempt {attempt + 1}/{max_retries})...")
             connection = mariadb.connect(**config)
             cursor = connection.cursor()
 
@@ -44,42 +47,42 @@ def initialize_database():
             cursor.execute(f"USE {database}")
 
             sql_directory = 'sql'
-            print(f"Looking for SQL files in: {sql_directory}")
+            logger.info(f"Looking for SQL files in: {sql_directory}")
 
             # Execute schema
             schema_path = os.path.join(sql_directory, 'schema.sql')
             if os.path.exists(schema_path):
-                print("Creating tables...")
+                logger.info("Creating tables...")
                 execute_sql_file(cursor, schema_path)
             else:
-                print(f"ERROR: schema.sql not found at {schema_path}")
+                logger.error(f"ERROR: schema.sql not found at {schema_path}")
                 return
 
             # Execute seed data
             seed_path = os.path.join(sql_directory, 'seed.sql')
             if os.path.exists(seed_path):
-                print("Inserting seed data...")
+                logger.info("Inserting seed data...")
                 execute_sql_file(cursor, seed_path)
             else:
-                print(f"WARNING: seed.sql not found at {seed_path}")
+                logger.warning(f"WARNING: seed.sql not found at {seed_path}")
 
             connection.commit()
 
             # Verify tables were created
             cursor.execute("SHOW TABLES")
             tables = cursor.fetchall()
-            print(f"Created tables: {[table[0] for table in tables]}")
+            logger.info(f"Created tables: {[table[0] for table in tables]}")
 
-            print("Database initialization completed successfully!")
+            logger.info("Database initialization completed successfully!")
             break
 
         except mariadb.Error as e:
-            print(f"Error: {e}")
+            logger.error(f"Error connecting to MariaDB Platform: {e}")
             if attempt < max_retries - 1:
-                print(f"Retrying in {retry_delay} seconds...")
+                logger.info(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
             else:
-                print("Max retries reached. Could not initialize database.")
+                logger.error("Max retries reached. Could not initialize database.")
                 return
 
         finally:

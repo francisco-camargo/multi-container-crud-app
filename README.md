@@ -6,8 +6,8 @@ This project is designed for educational purposes. It aims to help you learn how
 
 - Set up and configure Docker containers.
 - Create and manage a MariaDB database.
-- Connect a Python application to a MariaDB database.
-- Perform CRUD (Create, Read, Update, Delete) operations using SQL and Python.
+- Perform CRUD (Create, Read, Update, Delete) operations using SQL and Python from within the `localhost`
+- Connect a simple Python application to a MariaDB database from within the `python-app` container.
 
 ## Citation Instructions
 
@@ -131,7 +131,7 @@ python src/initialize_db.py
 
 ### 7. Implement CRUD Operations
 
-📌 **Milestone:** Create a comprehensive CRUD interface.
+📌 **Milestone:** Create a comprehensive CRUD interface that can be used from `localhost`.
 
 📄 **File:** `crud_operations.py`
 
@@ -159,7 +159,7 @@ python src/initialize_db.py
 
 ### 9. Return logging back to the host machine
 
-Let's have logging that saves to a file and then have a Docker volume that makes that file visible from the localhost.
+📌 **Milestone:** Add logging to the `python-app` that saves logs to a file. A Docker volume will persist the logs into the localhost.
 
 The logs will show:
 
@@ -167,6 +167,8 @@ The logs will show:
 - Log level (DEBUG, INFO, ERROR, etc.)
 - Component name
 - Detailed message
+
+The logs will be available within the `logs` directory in the `localhost` and will be overwritten each time the container runs.
 
 This setup will help you:
 
