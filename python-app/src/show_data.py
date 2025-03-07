@@ -3,6 +3,10 @@ import time
 import mariadb
 from dotenv import load_dotenv
 from tabulate import tabulate
+from src.logging_config import setup_logging
+
+# Set up logger
+logger = setup_logging()
 
 host = os.getenv('MARIADB_HOST')
 
@@ -27,39 +31,46 @@ def show_table_data(
 
     for attempt in range(max_retries):
         try:
+            logger.info(f"Attempting to connect to database (attempt {attempt + 1}/{max_retries})...")
             connection = mariadb.connect(**config)
             cursor = connection.cursor()
 
             # Get column names
+            logger.debug(f"Fetching column names for table: {table_name}")
             cursor.execute(f"SHOW COLUMNS FROM {table_name}")
             columns = [column[0] for column in cursor.fetchall()]
 
             # Get table data
+            logger.debug(f"Fetching data from table: {table_name}")
             cursor.execute(f"SELECT * FROM {table_name}")
             rows = cursor.fetchall()
 
             if rows:
+                logger.info(f"Found {len(rows)} records in {table_name}")
                 print(f"\nContents of {table_name}:")
                 print(tabulate(rows, headers=columns, tablefmt='grid'))
             else:
+                logger.warning(f"No data found in {table_name}")
                 print(f"\nNo data found in {table_name}")
 
             break
 
         except mariadb.Error as e:
-            print(f"Error: {e}")
+            logger.error(f"Database error: {e}")
             if attempt < max_retries - 1:
-                print(f"Retrying in {retry_delay} seconds...")
+                logger.info(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
             else:
-                print("Max retries reached. Could not connect to database.")
+                logger.error("Max retries reached. Could not connect to database.")
                 return
 
         finally:
             if 'cursor' in locals():
                 cursor.close()
+                logger.debug("Cursor closed")
             if 'connection' in locals():
                 connection.close()
+                logger.debug("Connection closed")
 
 if __name__ == "__main__":
     tables = ['users', 'posts', 'comments']
