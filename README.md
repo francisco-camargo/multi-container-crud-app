@@ -168,7 +168,7 @@ The logs will show:
 - Component name
 - Detailed message
 
-The logs will be available within the `logs` directory in the `localhost`.
+The logs will be available within the `logs` directory in the `localhost` and will be overwritten each time the container runs.
 
 This setup will help you:
 
