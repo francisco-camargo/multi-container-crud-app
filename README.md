@@ -168,6 +168,8 @@ The logs will show:
 - Component name
 - Detailed message
 
+The logs will be available within the `logs` directory in the `localhost`.
+
 This setup will help you:
 
 - Debug database connection issues
