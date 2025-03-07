@@ -14,7 +14,7 @@ def show_table_data(
     table_name,
     host=host,
     ):
-    print('Running show_data.py')
+    logger.info('Running show_data.py')
     load_dotenv()
 
     config = {
@@ -47,11 +47,10 @@ def show_table_data(
 
             if rows:
                 logger.info(f"Found {len(rows)} records in {table_name}")
-                print(f"\nContents of {table_name}:")
-                print(tabulate(rows, headers=columns, tablefmt='grid'))
+                logger.info(f"\nContents of {table_name}:")
+                logger.info("\n" + tabulate(rows, headers=columns, tablefmt='grid'))
             else:
                 logger.warning(f"No data found in {table_name}")
-                print(f"\nNo data found in {table_name}")
 
             break
 
