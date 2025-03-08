@@ -18,7 +18,7 @@ services:
       start_period: 30s
 
   python-app:
-    image: crud-python-app:latest # name the image
+    image: python-app-image # name the image
     build:
       # Directory containing build context (Dockerfile and source files)
       context: ./python-app
